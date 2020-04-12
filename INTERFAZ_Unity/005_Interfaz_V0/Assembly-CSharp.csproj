@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Main.cs" />
     <Compile Include="Assets\Planta.cs" />
     <Compile Include="Assets\Tiesto.cs" />
     <Compile Include="Assets\main_scrt.cs" />
