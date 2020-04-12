@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{45A2FD84-0CA2-B932-21A0-EC922B3B6D94}</ProjectGuid>
+    <ProjectGuid>{357A634E-B6DD-8E0A-0931-B4E2614791B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -70,37 +70,37 @@
     <Compile Include="Assets\Tiesto.cs" />
     <Compile Include="Assets\plant1_handler.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/002_Garden/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/2019.3.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

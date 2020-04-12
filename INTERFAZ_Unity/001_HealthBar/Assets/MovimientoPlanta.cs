@@ -12,7 +12,7 @@ public class MovimientoPlanta : MonoBehaviour
         targetpos.x = 100;
         targetpos.y = 100;
         targetpos.z = 0;
-        transform.position = targetpos;
+       // transform.position = targetpos;
         currentPos = targetpos;
         
     }
