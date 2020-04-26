@@ -17,107 +17,95 @@ using System.Threading.Tasks;
 public class Main : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Button btn_connect;
-    public Text EstadoConnection;
-    public Text EstadoBusqueda;
-    public Dropdown Selector;
-    public Button btn_Buscar;
-    public Button btn_Estudio_11;
-    TcpClient client;
-    TcpListener servidor;
-    Socket sock;
-    int port;
+    int[] color = new int[6];
+    int[] DF = new int[6];
+    string[] Tipo = new string[6];
+    public Text[] color_ = new Text[6];
+    public Text[] DF_ = new Text[6];
+    public Text[] Tipo_ = new Text[6];
+    public Button[] ConsultaPos_= new Button[6];
+    public Dropdown ConsultaPlanta;
+    public Button ConsultaPanta;
+    public Image Delta; 
     void Start()
-    {
-        btn_connect.onClick.AddListener(Connect);
-        btn_Buscar.onClick.AddListener(realizarBusqueda);
-        btn_Estudio_11.onClick.AddListener(Estudio);
+    { 
+        for(int i=0;i>6;i++)
+        {
+            color[i] = -1;
+            DF[i] = -1;
+            Tipo[i] = "SIN BUSQUEDAS REGISTRADAS";
+
+        }
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Actualiza();
         
     }
 
-
-    //Conexion con el programa servidor que esta a la espera (visión o movimientos)
-    void Connect()
+    void Actualiza()
     {
-        //Convert port number to text with error handling 
-        if (!int.TryParse("8000", out port))
-        {
-            //Adds debug to list box and shows message box
-            EstadoConnection.text = "Port number no valied";
-            print("Putada");
+        
+
+        
+            for (int i = 0; i < 6; i++)
+            {
+                if (color[i] < 0 || DF[i] < 0)
+                {
+                    Tipo_[i].text= "SIN BUSQUEDAS REGISTRADAS";
+                    DF_[i].text = " ";
+                    color_[i].text = " ";
+                }
+                else
+                {
+                    DF_[i].text = "DF =  " + DF[i].ToString();
+                    color_[i].text = "CLR =  " + color[i].ToString();
+                    Tipo_[i].text = Tipo[i];
+                }
+                
+
+
+
+            }
         }
 
-        //Attemps to make connection
-        try
-        {
-            client = new TcpClient("127.0.0.1", port);
-            //Adds debug to list box and shows message box
-            EstadoConnection.text = "Connection Made";
-
-        }
-        catch (System.Net.Sockets.SocketException)
-        {
-            //Adds debug to list box and shows message box
-            EstadoConnection.text = "Connection Failed";
-        }
+    //Si la información que almacenamos al consultar la base de datos es:
+        //Cons_Posicion :  posición en la que se encuentra la planta consultada en la base de datos(1,2,3,4,5,6)
+        //Cons_Tipo: Tipo consultado en la base de datos
+        //Cons_DF: DF consultada en la base de datos; 
+        //Cons_color: color consultado en la base de datos;
+    
+    void Cargar_Consulta(int Pos, string tipo, int DensFoliar, int Color)
+    {
+        Tipo[Pos] = tipo;
+        DF[Pos] = DensFoliar;
+        color[Pos] = Color;
 
     }
 
-    //Envío TipoPlanta
-    void realizarBusqueda()
+    void Consulta_Planta()
     {
-        try
-        {
-            string message = "BUSCAR " + Selector.captionText.text; //set message variable to input
-            int byteCount = Encoding.ASCII.GetByteCount(message); //Measures bytes required to send ASCII data
-            byte[] sendData = new byte[byteCount]; //Prepares variable size for required data
-            sendData = Encoding.ASCII.GetBytes(message); //Sets the sendData variable to the actual binary data (from the ASCII)
-            NetworkStream stream = client.GetStream(); //Opens up the network stream
-            stream.Write(sendData, 0, sendData.Length); //Transmits data onto the stream
-            EstadoConnection.text = "Consulta realizada sobre" + Selector.captionText.text;
-            
+        int Cons_Posicion;
+        string Cons_Tipo;
+        int Cons_DF;
+        int Cons_color;
+        //CODIGO DE CONSULTA A LA BASE DE DATOS Y ALMACENAMIENTO EN LAS VARIABLES DECLARADAS
 
-        }
-        catch (System.NullReferenceException) //Error if socket not open
-        {
-            //Adds debug to list box and shows message box
-            EstadoConnection.text = "Fallo al enviar datos";
-        }
-
-        //toolStripButton3 -- Close Connection
-
+        Cons_Posicion = 1;
+        Cons_Tipo = "Prueba";
+        Cons_DF = 1;
+        Cons_color = 1;
+        Cargar_Consulta(Cons_Posicion, Cons_Tipo, Cons_DF, Cons_color);
 
     }
 
-    void Estudio()
+    //Respecto a la información del robot, necesitamos su posicion 2D, que obtenemos desde la socket que se comunica con vrep
+    void PosRobot()
     {
-        try
-        {
-            string message = "ESTUDIAR LA POSICIÓN 1-1" ;//set message variable to input
-            int byteCount = Encoding.ASCII.GetByteCount(message); //Measures bytes required to send ASCII data
-            byte[] sendData = new byte[byteCount]; //Prepares variable size for required data
-            sendData = Encoding.ASCII.GetBytes(message); //Sets the sendData variable to the actual binary data (from the ASCII)
-            NetworkStream stream = client.GetStream(); //Opens up the network stream
-            stream.Write(sendData, 0, sendData.Length); //Transmits data onto the stream
-            EstadoConnection.text = "Consulta realizada sobre" + Selector.captionText.text;
-
-
-        }
-        catch (System.NullReferenceException) //Error if socket not open
-        {
-            //Adds debug to list box and shows message box
-            EstadoConnection.text = "Fallo al enviar datos";
-        }
-
-        //toolStripButton3 -- Close Connection
-
 
     }
-
-
 }

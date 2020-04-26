@@ -63,10 +63,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Delta.cs" />
     <Compile Include="Assets\Main.cs" />
-    <Compile Include="Assets\Planta.cs" />
-    <Compile Include="Assets\Tiesto.cs" />
-    <Compile Include="Assets\main_scrt.cs" />
+    <Compile Include="Assets\MovimientoRobot.cs" />
+    <Compile Include="Assets\Python\Examples\PythonHelloWorld.cs" />
+    <Compile Include="Assets\Python\Examples\PythonLibrary.cs" />
+    <Compile Include="Assets\Python\Examples\PythonUnityHelloWorld.cs" />
+    <Compile Include="Assets\Python\Scripts\DebugLogWriter.cs" />
+    <Compile Include="Assets\Python\Scripts\UnityPython.cs" />
+    <None Include="Assets\Python\IronPython-2.7.9\IronPython.xml" />
+    <None Include="Assets\Python\LICENSE.txt" />
+    <None Include="Assets\Python\IronPython-2.7.9\IronPython.SQLite.xml" />
+    <None Include="Assets\Python\IronPython-2.7.9\Microsoft.Scripting.xml" />
+    <None Include="Assets\Python\IronPython-2.7.9\Microsoft.Dynamic.xml" />
+    <None Include="Assets\Python\IronPython-2.7.9\IKVM.Reflection.License.txt" />
+    <None Include="Assets\Python\IronPython-2.7.9\IronPython.Modules.xml" />
+    <None Include="Assets\Python\Lib\site-packages\README.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -324,6 +336,27 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/Program Files/Unity/Editor/2019.3.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Reflection">
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Assets/Python/IronPython-2.7.9/IKVM.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython">
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Assets/Python/IronPython-2.7.9/IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules">
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Assets/Python/IronPython-2.7.9/IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.SQLite">
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Assets/Python/IronPython-2.7.9/IronPython.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Assets/Python/IronPython-2.7.9/Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Assets/Python/IronPython-2.7.9/Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata">
+      <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/005_Interfaz_V0/Assets/Python/IronPython-2.7.9/Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Editor/2019.3.6f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
