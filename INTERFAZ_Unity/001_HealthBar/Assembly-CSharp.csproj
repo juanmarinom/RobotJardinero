@@ -67,8 +67,10 @@
     <Compile Include="Assets\EfectoButton.cs" />
     <Compile Include="Assets\HealthBar.cs" />
     <Compile Include="Assets\MovimientoPlanta.cs" />
+    <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Tiesto.cs" />
     <Compile Include="Assets\plant1_handler.cs" />
+    <Compile Include="Assets\prueba.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
