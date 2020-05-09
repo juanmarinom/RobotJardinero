@@ -4,6 +4,7 @@ import Joints as motor
 
 class Delta:
 
+    clientID = 0
     # Funcion que coge el valor de los handle de los motores para cada pata
     def __init__(self, name0, name1, name2, sentido1, sentido2, sentido3, cero1, cero2, cero3, clientID):
         self.clientID = clientID
@@ -30,7 +31,9 @@ class Delta:
 
 
 
-    def getPosition(self):
+
+
+    def getJointPosition(self):
         self.m0.getJointPosition()
         self.m1.getJointPosition()
         self.m2.getJointPosition()
@@ -68,6 +71,15 @@ class Delta:
             self.m1.setJointVelocity(v1)
         if v2 != -1:
             self.m2.setJointVelocity(v2)
+
+    def getCameraPosition(self):
+
+        r, BaseCamara = vrep.simxGetObjectHandle(self.clientID, 'BASECAMARA_respondable', vrep.simx_opmode_oneshot_wait)
+        r, BaseRobot = vrep.simxGetObjectHandle(self.clientID, 'Cuboid2', vrep.simx_opmode_oneshot_wait)
+
+        r,position = vrep.simxGetObjectPosition(self.clientID, BaseCamara, BaseRobot, vrep.simx_opmode_oneshot_wait)
+        return position
+
 
 
 
