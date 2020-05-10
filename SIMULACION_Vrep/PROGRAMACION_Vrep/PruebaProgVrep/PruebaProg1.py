@@ -11,7 +11,7 @@ from movement import *
 def write(file, robot):
     pos_teo = forward_kin(robot.getAngles())
     campos = robot.getCameraPosition()
-    pos_real = [-campos[1]*1000,campos[0]*1000,-campos[2]*1000]
+    pos_real = [campos[1]*1000,-campos[0]*1000,-campos[2]*1000]
 
     file.write("{},{},{},{},{},{}\n".format(pos_teo[0],pos_teo[1],pos_teo[2],
         pos_real[0],pos_real[1],pos_real[2]))
