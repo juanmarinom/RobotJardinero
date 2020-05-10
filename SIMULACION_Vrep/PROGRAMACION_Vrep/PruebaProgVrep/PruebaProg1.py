@@ -6,25 +6,7 @@ import sys
 
 sys.path.insert(1, '../../../control')
 from kinematics import *
-
-def calc_vel(ref):
-    curpos = Robot.getAngles()
-    err = list()
-    for re,cur in zip(ref,curpos):
-        err.append(abs(re-cur))
-
-    norm = max(err)
-    err[0]=err[0]/norm
-    # if err[0]<0.05:
-    #     err[0]=0.05
-    err[1]=err[1]/norm
-    # if err[1]<0.05:
-    #     err[1]=0.05
-    err[2]=err[2]/norm
-    # if err[2]<0.05:
-    #     err[2]=0.05
-
-    return err
+from movement import *
 
 # Vrep connection
 vrep.simxFinish(-1) # Ending of previous communication open
@@ -49,58 +31,69 @@ if clientID != -1:
     robpos = forward_kin([90,90,90])
     print("La posicion del efector final es: {}".format(robpos))
 
-
     while True:
-        print("## Pos 1")
-        angles = inverse_kin([-40,-40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
+        move(Robot, [80,80,200])
+        move(Robot, [-80,80,200])
+        move(Robot, [-80,-80,200])
+        move(Robot, [80,-80,200])
+        move(Robot, [80,80,200])
         time.sleep(1)
-        print(Robot.getAngles())
 
-        print("## Pos 2")
-        angles = inverse_kin([40,-40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
+        move(Robot, [80,80,200])
+        move(Robot, [-40,-40,200])
+        move(Robot, [-40,40,200])
+        move(Robot, [80,80,200])
         time.sleep(1)
-        print(Robot.getAngles())
 
-        print("## Pos 3")
-        angles = inverse_kin([40,40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
-        time.sleep(1)
-        print(Robot.getAngles())
+        # print("## Pos 1")
+        # angles = inverse_kin([-0,0,150])
+        # print("Angulos del robot = {}".format(angles))
+        # vel = calc_vel(angles)
+        # Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
+        # Robot.setAngles(angles[0],angles[1],angles[2])
+        # time.sleep(1)
+        # print("Angulos del robot reales = {}".format(Robot.getAngles()))
+        # print("Posicion del robot = {}".format(forward_kin(Robot.getAngles())))
+        # campos = Robot.getCameraPosition()
+        # campos2 = [campos[1]*1000,campos[0]*1000,campos[2]*1000]
+        # print("Posicion de la camara real = {}".format(campos2))
+        #
+        # print("## Pos 2")
+        # angles = inverse_kin([0,0,270])
+        # print("Angulos del robot = {}".format(angles))
+        # vel = calc_vel(angles)
+        # Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
+        # Robot.setAngles(angles[0],angles[1],angles[2])
+        # time.sleep(1)
+        # print("Angulos del robot reales = {}".format(Robot.getAngles()))
+        # print("Posicion del robot = {}".format(forward_kin(Robot.getAngles())))
+        # campos = Robot.getCameraPosition()
+        # campos2 = [campos[1]*1000,campos[0]*1000,campos[2]*1000]
+        # print("Posicion de la camara real = {}".format(campos2))
 
-        print("## Pos 4")
-        angles = inverse_kin([-40,40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
-        time.sleep(1)
-        print(Robot.getAngles())
+        # print("## Pos 3")
+        # angles = inverse_kin([40,40,150])
+        # print(angles)
+        # vel = calc_vel(angles)
+        # print(vel)
+        # Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
+        # Robot.setAngles(angles[0],angles[1],angles[2])
+        # time.sleep(1)
+        # print(Robot.getAngles())
+        #
+        # print("## Pos 4")
+        # angles = inverse_kin([-40,40,150])
+        # print(angles)
+        # vel = calc_vel(angles)
+        # print(vel)
+        # Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
+        # Robot.setAngles(angles[0],angles[1],angles[2])
+        # time.sleep(1)
+        # print(Robot.getAngles())
     #vrep.simxSynchronousTrigger(clientID)
 
-
-    #Posicion inicial
-
-    Robot.setAngles(30,-10,-20)
-    time.sleep(2)
-
     #Obtención posición base camara respecto centro robot(centro, parte superior)
-    pos = Robot.getCameraPosition()
-    print(pos)
+
 
 else:
     print("Failed connection")
