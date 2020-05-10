@@ -55,12 +55,6 @@ def move(rob, ref, velnom=0.7, type="linear", numpoints=50):
                 curpos = forward_kin(rob.getAngles())
                 time.sleep(0.01)
 
-            # Para la documentación
-            # print("Angulos del robot reales = {}".format(rob.getAngles()))
-            # print("Posicion del robot = {}".format(forward_kin(rob.getAngles())))
-            # campos = rob.getCameraPosition()
-            # campos2 = [campos[1]*1000,campos[0]*1000,campos[2]*1000]
-            # print("Posicion de la camara real = {}".format(campos2))
         return 1
 
     # Movimiento no lineal del robot de una posicion a otra
