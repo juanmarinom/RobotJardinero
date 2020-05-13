@@ -8,13 +8,14 @@ HOST = '127.0.0.1'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    data = s.recv(1024)
+    s.connect((HOST, PORT))#Creación del socket
+    data = s.recv(1024)#Recibimiento de la información
     print('Posicion de destino: ')
     # print(data)
     dest = data.decode('ascii')
     print(dest)
     s.sendall(b'1')
+    s.close()
     # num=len(dest)
     # print(num)
     XFin=dest[0:3]

@@ -14,5 +14,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     print("Planta elegida: ", ele)
     print("Enviando información a el servidor...")
     s.sendall(b'Densidad foliar= 23, Salud = 56')
+    s.close()
     # Prop = b'050-025' 
     # s.sendall(Prop)
