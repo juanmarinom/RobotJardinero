@@ -29,9 +29,12 @@ class Join:
         self.position = self.Sentido * (pos - self.Cero)
         vrep.simxSetJointTargetPosition(self.clientID, self.handle, self.position * math.pi / 180, vrep.simx_opmode_oneshot)
 
+
+
     def getJointPosition (self):
         ret, position = vrep.simxGetJointPosition(self.clientID, self.handle, vrep.simx_opmode_streaming)
-        self.position = math.degrees(position)
+        ## Modificado
+        self.position = self.Sentido * math.degrees(position) + self.Cero
 
     def setJointVelocity(self, vel):
         self.velocity = vel
