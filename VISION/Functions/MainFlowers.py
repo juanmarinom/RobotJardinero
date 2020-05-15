@@ -1,17 +1,17 @@
+import cv2 as cv
+import numpy as np
+
 from Daisy import *
 from Dandelion import *
 from Tulip import *
 from Sunflower import *
 from Rose import *
 
-
-def Flower(img, flower):
-
-
+def Flower(image, flower):
 
     Health = None
     LeafDens = None
-
+    img = cv.imread(image)
     if (flower == 0):
         Health, LeafDens = DaisyStatus(img)
 
@@ -30,5 +30,4 @@ def Flower(img, flower):
     else:
         print("Could not read the image or number not expected.")
 
-    #escribo health y LeafDens en la base de datos
     return
