@@ -123,12 +123,12 @@ def DandelionStatus(img):
     hull_area = cv.contourArea(hull)
     solidity = float(area) / hull_area
     perfect_extent = 0.7853981633975
-    print('Extent', extent)
-    print('aspect_ratio', aspect_ratio)
-    print('Solidity', solidity)
+    #print('Extent', extent)
+    #print('aspect_ratio', aspect_ratio)
+    #print('Solidity', solidity)
     factor = 25
     Health = (extent / perfect_extent) * 0.3 + aspect_ratio * 0.5 + solidity * 0.2
-    print('Health', Health)
+    #print('Health', Health)
 
     # Leaf Density: number of petals per 90º
     leafDens = None
@@ -139,11 +139,12 @@ def DandelionStatus(img):
 
     ############################################# Show the image
 
-    cv.imshow("img", img)
+    """cv.imshow("img", img)
     cv.imshow("res2", res2)
     cv.imshow("mask", mask)
     cv.imshow("mask_op", mask_op)
     cv.imshow("closing", mask_cl)
     k = cv.waitKey(0)
+    cv.imwrite('DandelionProc.jpg', img)"""
 
     return Health, leafDens

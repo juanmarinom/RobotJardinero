@@ -124,25 +124,26 @@ def DaisyStatus(img):
     hull_area = cv.contourArea(hull)
     solidity = float(area) / hull_area
     perfect_extent = 0.7853981633975
-    print('Extent', extent)
-    print('aspect_ratio', aspect_ratio)
-    print('Solidity',solidity)
+    #print('Extent', extent)
+    #print('aspect_ratio', aspect_ratio)
+    #print('Solidity',solidity)
     factor = 17
     Health = (extent/perfect_extent)*0.3 + aspect_ratio*0.5 + solidity*0.2
-    print('Health',Health)
+    #print('Health',Health)
 
     #Leaf Density: number of petals per 90º
     leafNum = round((len(list_def)/2 + len(corners)/factor)/2)
     leafDens = round(leafNum/(2*3.14159265359))
-    print('leafNum', leafNum)
-    print('leafDens per Radian', leafDens)
+    #print('leafNum', leafNum)
+    #print('leafDens per Radian', leafDens)
 
     ############################################# Show the image
-    cv.imshow("img", img)
+    """cv.imshow("img", img)
     cv.imshow("res2", res2)
     cv.imshow("mask", mask)
     cv.imshow("mask_op", mask_op)
     cv.imshow("closing", mask_cl)
     k = cv.waitKey(0)
+    cv.imwrite('DaisyProc.jpg',img)"""
 
     return Health, leafDens
