@@ -33,7 +33,7 @@ class database:
                     posicion_x REAL,
                     posicion_y REAL,
                     DensidadFoliar REAL,
-                    PetalosRadian REAL,
+                    Salud REAL,
                     FOREIGN KEY(categoria_id) REFERENCES categoria(id)
                 )
             ''')
@@ -62,7 +62,7 @@ class database:
         self.connection.close()
         return 1
 
-    def add_planta(self, categoria, posicion_x=0, posicion_y=0, DensidadFoliar=0, PetalosRadian=0):
+    def add_planta(self, categoria, posicion_x=0, posicion_y=0, DensidadFoliar=0, Salud=0):
         self.connection = sqlite3.connect(self.name)
         self.cursor = self.connection.cursor()
         val=False
@@ -79,7 +79,7 @@ class database:
             try:
                 self.cursor.execute("""
                 INSERT INTO plantas VALUES (null,{},{},{},{},{})
-                """.format(cat_id,posicion_x,posicion_y,DensidadFoliar,PetalosRadian))
+                """.format(cat_id,posicion_x,posicion_y,DensidadFoliar,Salud))
             except sqlite3.IntegrityError:
                 print("No se puede agregar esta planta a la base de datos.")
         else:
@@ -161,13 +161,13 @@ class database:
         self.connection.close()
         return info
 
-    def get_plantbyspecs(self, posicion_x=None, posicion_y=None, DensidadFoliar=None, PetalosRadian=None):
+    def get_plantbyspecs(self, posicion_x=None, posicion_y=None, DensidadFoliar=None, Salud=None):
         self.connection = sqlite3.connect(self.name)
         self.cursor = self.connection.cursor()
 
         # En funcion de lo que se haya introducido se busca
         if DensidadFoliar==None:
-            if PetalosRadian==None:
+            if Salud==None:
                 if posicion_x==None and posicion_y==None:
                     # Devolver todas las plantas (sin condiciones)
                     self.cursor.execute("SELECT * FROM plantas")
@@ -184,24 +184,24 @@ class database:
 
             else:
                 if posicion_x==None and posicion_y==None:
-                    # Devolver plantas con condicion de PetalosRadian
+                    # Devolver plantas con condicion de Salud
                     self.cursor.execute('''
-                            SELECT * FROM plantas WHERE PetalosRadian = {}
-                        '''.format(PetalosRadian))
+                            SELECT * FROM plantas WHERE Salud = {}
+                        '''.format(Salud))
                     info = self.cursor.fetchall()
 
                 else:
-                    # Devolver plantas con condicion de posicion y de PetalosRadian
+                    # Devolver plantas con condicion de posicion y de Salud
                     self.cursor.execute('''
                         SELECT * FROM plantas WHERE
                         posicion_x = {} AND
                         posicion_y = {} AND
-                        PetalosRadian = {}
-                    '''.format(posicion_x, posicion_y, PetalosRadian))
+                        Salud = {}
+                    '''.format(posicion_x, posicion_y, Salud))
                     info = self.cursor.fetchall()
 
         else:
-            if PetalosRadian==None:
+            if Salud==None:
                 if posicion_x==None and posicion_y==None:
                     # Devolver plantas con condicion de DensidadFoliar
                     self.cursor.execute('''
@@ -221,21 +221,21 @@ class database:
 
             else:
                 if posicion_x==None and posicion_y==None:
-                    # Devolver plantas con condiciones de DensidadFoliar y PetalosRadian
+                    # Devolver plantas con condiciones de DensidadFoliar y Salud
                     self.cursor.execute('''
-                        SELECT * FROM plantas WHERE DensidadFoliar = {} AND PetalosRadian = {}
-                    '''.format(DensidadFoliar, PetalosRadian))
+                        SELECT * FROM plantas WHERE DensidadFoliar = {} AND Salud = {}
+                    '''.format(DensidadFoliar, Salud))
                     info = self.cursor.fetchall()
 
                 else:
-                    # Devolver plantas con condiciones de DensidadFoliar, PetalosRadian y posicion
+                    # Devolver plantas con condiciones de DensidadFoliar, Salud y posicion
                     self.cursor.execute('''
                         SELECT * FROM plantas WHERE
                         posicion_x = {} AND
                         posicion_y = {} AND
-                        PetalosRadian = {} AND
+                        Salud = {} AND
                         DensidadFoliar = {}
-                    '''.format(posicion_x, posicion_y, PetalosRadian, DensidadFoliar))
+                    '''.format(posicion_x, posicion_y, Salud, DensidadFoliar))
                     info = self.cursor.fetchall()
 
         self.connection.commit()
@@ -304,7 +304,7 @@ class database:
         self.connection.close()
         return 1
 
-    def update_plant(self,id,posicion_x=None,posicion_y=None,DensidadFoliar=None,PetalosRadian=None):
+    def update_plant(self,id,posicion_x=None,posicion_y=None,DensidadFoliar=None,Salud=None):
         self.connection = sqlite3.connect(self.name)
         self.cursor = self.connection.cursor()
 
@@ -319,9 +319,9 @@ class database:
             if DensidadFoliar!=None:
                 self.cursor.execute("UPDATE plantas SET DensidadFoliar = {} WHERE id = {}".format(DensidadFoliar,id))
                 print("Se ha actualizado el campo DensidadFoliar.")
-            if PetalosRadian!=None:
-                self.cursor.execute("UPDATE plantas SET PetalosRadian = {} WHERE id = {}".format(PetalosRadian,id))
-                print("Se ha actualizado el campo PetalosRadian.")
+            if Salud!=None:
+                self.cursor.execute("UPDATE plantas SET Salud = {} WHERE id = {}".format(Salud,id))
+                print("Se ha actualizado el campo Salud.")
         except:
             print("No se ha podido actualizar")
             self.connection.close()
