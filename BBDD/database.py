@@ -32,8 +32,8 @@ class database:
                     categoria_id INTEGER NOT NULL,
                     posicion_x REAL,
                     posicion_y REAL,
-                    area REAL,
-                    color REAL,
+                    DensidadFoliar REAL,
+                    PetalosRadian REAL,
                     FOREIGN KEY(categoria_id) REFERENCES categoria(id)
                 )
             ''')
@@ -62,7 +62,7 @@ class database:
         self.connection.close()
         return 1
 
-    def add_planta(self, categoria, posicion_x=0, posicion_y=0, area=0, color=0):
+    def add_planta(self, categoria, posicion_x=0, posicion_y=0, DensidadFoliar=0, PetalosRadian=0):
         self.connection = sqlite3.connect(self.name)
         self.cursor = self.connection.cursor()
         val=False
@@ -79,7 +79,7 @@ class database:
             try:
                 self.cursor.execute("""
                 INSERT INTO plantas VALUES (null,{},{},{},{},{})
-                """.format(cat_id,posicion_x,posicion_y,area,color))
+                """.format(cat_id,posicion_x,posicion_y,DensidadFoliar,PetalosRadian))
             except sqlite3.IntegrityError:
                 print("No se puede agregar esta planta a la base de datos.")
         else:
@@ -161,13 +161,13 @@ class database:
         self.connection.close()
         return info
 
-    def get_plantbyspecs(self, posicion_x=None, posicion_y=None, area=None, color=None):
+    def get_plantbyspecs(self, posicion_x=None, posicion_y=None, DensidadFoliar=None, PetalosRadian=None):
         self.connection = sqlite3.connect(self.name)
         self.cursor = self.connection.cursor()
 
         # En funcion de lo que se haya introducido se busca
-        if area==None:
-            if color==None:
+        if DensidadFoliar==None:
+            if PetalosRadian==None:
                 if posicion_x==None and posicion_y==None:
                     # Devolver todas las plantas (sin condiciones)
                     self.cursor.execute("SELECT * FROM plantas")
@@ -184,58 +184,58 @@ class database:
 
             else:
                 if posicion_x==None and posicion_y==None:
-                    # Devolver plantas con condicion de color
+                    # Devolver plantas con condicion de PetalosRadian
                     self.cursor.execute('''
-                            SELECT * FROM plantas WHERE color = {}
-                        '''.format(color))
+                            SELECT * FROM plantas WHERE PetalosRadian = {}
+                        '''.format(PetalosRadian))
                     info = self.cursor.fetchall()
 
                 else:
-                    # Devolver plantas con condicion de posicion y de color
+                    # Devolver plantas con condicion de posicion y de PetalosRadian
                     self.cursor.execute('''
                         SELECT * FROM plantas WHERE
                         posicion_x = {} AND
                         posicion_y = {} AND
-                        color = {}
-                    '''.format(posicion_x, posicion_y, color))
+                        PetalosRadian = {}
+                    '''.format(posicion_x, posicion_y, PetalosRadian))
                     info = self.cursor.fetchall()
 
         else:
-            if color==None:
+            if PetalosRadian==None:
                 if posicion_x==None and posicion_y==None:
-                    # Devolver plantas con condicion de area
+                    # Devolver plantas con condicion de DensidadFoliar
                     self.cursor.execute('''
-                        SELECT * FROM plantas WHERE area = {}
-                    '''.format(area))
+                        SELECT * FROM plantas WHERE DensidadFoliar = {}
+                    '''.format(DensidadFoliar))
                     info = self.cursor.fetchall()
 
                 else:
-                    # Devolver plantas con condiciones de area y posicion
+                    # Devolver plantas con condiciones de DensidadFoliar y posicion
                     self.cursor.execute('''
                         SELECT * FROM plantas WHERE
                         posicion_x = {} AND
                         posicion_y = {} AND
-                        area = {}
-                    '''.format(posicion_x, posicion_y, area))
+                        DensidadFoliar = {}
+                    '''.format(posicion_x, posicion_y, DensidadFoliar))
                     info = self.cursor.fetchall()
 
             else:
                 if posicion_x==None and posicion_y==None:
-                    # Devolver plantas con condiciones de area y color
+                    # Devolver plantas con condiciones de DensidadFoliar y PetalosRadian
                     self.cursor.execute('''
-                        SELECT * FROM plantas WHERE area = {} AND color = {}
-                    '''.format(area, color))
+                        SELECT * FROM plantas WHERE DensidadFoliar = {} AND PetalosRadian = {}
+                    '''.format(DensidadFoliar, PetalosRadian))
                     info = self.cursor.fetchall()
 
                 else:
-                    # Devolver plantas con condiciones de area, color y posicion
+                    # Devolver plantas con condiciones de DensidadFoliar, PetalosRadian y posicion
                     self.cursor.execute('''
                         SELECT * FROM plantas WHERE
                         posicion_x = {} AND
                         posicion_y = {} AND
-                        color = {} AND
-                        area = {}
-                    '''.format(posicion_x, posicion_y, color, area))
+                        PetalosRadian = {} AND
+                        DensidadFoliar = {}
+                    '''.format(posicion_x, posicion_y, PetalosRadian, DensidadFoliar))
                     info = self.cursor.fetchall()
 
         self.connection.commit()
@@ -304,7 +304,7 @@ class database:
         self.connection.close()
         return 1
 
-    def update_plant(self,id,posicion_x=None,posicion_y=None,area=None,color=None):
+    def update_plant(self,id,posicion_x=None,posicion_y=None,DensidadFoliar=None,PetalosRadian=None):
         self.connection = sqlite3.connect(self.name)
         self.cursor = self.connection.cursor()
 
@@ -316,12 +316,12 @@ class database:
             if posicion_y!=None:
                 self.cursor.execute("UPDATE plantas SET posicion_y = {} WHERE id = {}".format(posicion_y,id))
                 print("Se ha actualizado el campo posicion_y.")
-            if area!=None:
-                self.cursor.execute("UPDATE plantas SET area = {} WHERE id = {}".format(area,id))
-                print("Se ha actualizado el campo area.")
-            if color!=None:
-                self.cursor.execute("UPDATE plantas SET color = {} WHERE id = {}".format(color,id))
-                print("Se ha actualizado el campo color.")
+            if DensidadFoliar!=None:
+                self.cursor.execute("UPDATE plantas SET DensidadFoliar = {} WHERE id = {}".format(DensidadFoliar,id))
+                print("Se ha actualizado el campo DensidadFoliar.")
+            if PetalosRadian!=None:
+                self.cursor.execute("UPDATE plantas SET PetalosRadian = {} WHERE id = {}".format(PetalosRadian,id))
+                print("Se ha actualizado el campo PetalosRadian.")
         except:
             print("No se ha podido actualizar")
             self.connection.close()
