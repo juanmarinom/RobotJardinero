@@ -31,13 +31,23 @@ Robot.setVelocity(vel, vel, vel)
 Robot.setAngles(90,90,90)
 time.sleep(1)
 
+# Bucle que se queda a la espera de que se establezca la conexion
+while True:
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # s.connect((HOST, PORT)) # Conexion al socket
+        s.bind((HOST, PORT))
+        s.listen()
+        conn, addr = s.accept()
+    except:
+        pass
+    else:
+        break
+
 # Se establece un bucle principal en el que se escucha el socket para moverse
 # una vez recibida la posicion
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT)) # Creación del socket
-
 while True:
-    data = s.recv(1024)#Recibimiento de la información
+    data = conn.recv(1024)#Recibimiento de la información
     if len(data)>1:
         print('Posicion de destino: ')
         # print(data)
@@ -54,5 +64,7 @@ while True:
         # Se mueve el robot a la posicion recibida
         move_robot(Robot, Ref)
         time.sleep(0.01)
+        msg = b'1'
+        conn.sendall(msg)
 
 s.close()
