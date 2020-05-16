@@ -22,7 +22,7 @@ def calc_vel(rob, ref):
 
     return err
 
-def move(rob, ref, velnom=0.7, type="linear", numpoints=50):
+def move_robot(rob, ref, velnom=0.7, type="linear", numpoints=50):
     # Movimiento lineal del robot de una posicion a otra
     if type == "linear":
         inter = list()
