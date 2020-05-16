@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a449d25-9caa-43ee-bb2f-f24afcd8c501" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../INTERACCION/PruebaInicial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERACCION/PruebaInicial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assets/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assets/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ArtifactDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/Artifacts/5d/5d9da16d04fefc8fc212f643b75511e1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/CurrentLayout-default.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ScriptAssemblies/Assembly-CSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ScriptAssemblies/Assembly-CSharp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/SourceAssetDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Programa/src/remoteApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Programa/src/remoteApi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,7 +25,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../Csharp_sock" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -50,7 +40,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.PruebaInicial">
+  <component name="RunManager" selected="Python.control">
     <configuration name="DeltaJardinero" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PruebaProgVrep" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -114,8 +104,30 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="control" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PruebaProgVrep" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/control.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.control" />
         <item itemvalue="Python.PruebaInicial" />
         <item itemvalue="Python.PruebaProg1" />
         <item itemvalue="Python.DeltaJardinero" />

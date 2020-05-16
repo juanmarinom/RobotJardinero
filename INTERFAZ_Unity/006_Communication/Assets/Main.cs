@@ -22,14 +22,25 @@ public class Main : MonoBehaviour
     public Dropdown Selector;
     public Button btn_Buscar;
     TcpClient client;
-    TcpListener servidor;
+    TcpListener server;
     Socket sock;
     public Unity_Server svr;
     int port;
+    NetworkStream stream;
     void Start()
     {
         btn_connect.onClick.AddListener(Connect_client);
         btn_Buscar.onClick.AddListener(SecuenciaCompleta);
+        Int32 port = 8000;
+        IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+
+        // TcpListener server = new TcpListener(port);
+        client = new TcpClient("127.0.0.1", port);
+
+        // Start listening for client requests.
+        //EstadoConnection.text = "mandada la mierda";
+        //server.Start();
+        stream = client.GetStream();
     }
 
     // Update is called once per frame
@@ -79,7 +90,7 @@ public class Main : MonoBehaviour
         try
         {
             IPAddress localAddr = IPAddress.Parse("127.0.0.1");
-            servidor = new TcpListener(localAddr, port);
+            server = new TcpListener(localAddr, port);
             //Adds debug to list box and shows message box
             EstadoConnection.text = "Connection Made server";
 
@@ -131,21 +142,21 @@ public class Main : MonoBehaviour
     }
     public void SecuenciaCompleta()
     {
-        TcpListener server = null;
+        
         try
         {
             // Set the TcpListener on port 8000.
-            Int32 port = 8000;
-            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
 
-            // TcpListener server = new TcpListener(port);
-            client = new TcpClient("127.0.0.1", port);
-
-            // Start listening for client requests.
-            //EstadoConnection.text = "mandada la mierda";
-            //server.Start();
-            NetworkStream stream = client.GetStream();
-            string data = "020-020-150";
+            string data = "";
+            if (Selector.captionText.text=="MARGARITA")
+            {
+                data = "000-000-150";
+            }
+                
+            if(Selector.captionText.text == "ROSA")
+            {
+                data = "040-040-200";
+            }
 
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
             stream.Write(msg, 0, msg.Length);
@@ -170,7 +181,7 @@ public class Main : MonoBehaviour
                 TcpClient client = server.AcceptTcpClient();
                 EstadoBusqueda.text = "Connected!";
 
-                data = null;
+                
 
                 // Get a stream object for reading and writing
                
