@@ -11,8 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using System.IO;
 
 public class Main : MonoBehaviour
 {
@@ -25,22 +24,23 @@ public class Main : MonoBehaviour
     TcpClient client;
     TcpListener servidor;
     Socket sock;
+    public Unity_Server svr;
     int port;
     void Start()
     {
-        btn_connect.onClick.AddListener(Connect);
-        btn_Buscar.onClick.AddListener(realizarBusqueda);
+        btn_connect.onClick.AddListener(Connect_client);
+        btn_Buscar.onClick.AddListener(SecuenciaCompleta);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
     //Conexion con el programa servidor que esta a la espera (visión o movimientos)
-    void Connect()
+    void Connect_client()
     {
         //Convert port number to text with error handling 
         if (!int.TryParse("8000", out port))
@@ -55,7 +55,33 @@ public class Main : MonoBehaviour
         {
             client = new TcpClient("127.0.0.1", port);
             //Adds debug to list box and shows message box
-            EstadoConnection.text = "Connection Made";
+            EstadoConnection.text = "Connection Made client";
+
+        }
+        catch (System.Net.Sockets.SocketException)
+        {
+            //Adds debug to list box and shows message box
+            EstadoConnection.text = "Connection Failed";
+        }
+
+    }
+    void Connect_server()
+    {
+        //Convert port number to text with error handling 
+        if (!int.TryParse("8000", out port))
+        {
+            //Adds debug to list box and shows message box
+            EstadoConnection.text = "Port number no valied";
+            print("Putada");
+        }
+
+        //Attemps to make connection
+        try
+        {
+            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+            servidor = new TcpListener(localAddr, port);
+            //Adds debug to list box and shows message box
+            EstadoConnection.text = "Connection Made server";
 
         }
         catch (System.Net.Sockets.SocketException)
@@ -69,6 +95,7 @@ public class Main : MonoBehaviour
     //Envío TipoPlanta
     void realizarBusqueda()
     {
+        Connect_client();
         try
         {
             string message = Selector.captionText.text; //set message variable to input
@@ -78,7 +105,11 @@ public class Main : MonoBehaviour
             NetworkStream stream = client.GetStream(); //Opens up the network stream
             stream.Write(sendData, 0, sendData.Length); //Transmits data onto the stream
             EstadoConnection.text = "Consulta realizada sobre" + Selector.captionText.text;
-            
+
+
+            //Recepcion de realizada
+
+
 
         }
         catch (System.NullReferenceException) //Error if socket not open
@@ -87,10 +118,83 @@ public class Main : MonoBehaviour
             EstadoConnection.text = "Fallo al enviar datos";
         }
 
-        //toolStripButton3 -- Close Connection
+        Connect_server();
+        // Buffer for reading data
+        Byte[] bytes = new Byte[256];
+        String data = null;
+
+        // Enter the listening loop.
+
+
 
 
     }
+    public void SecuenciaCompleta()
+    {
+        TcpListener server = null;
+        try
+        {
+            // Set the TcpListener on port 8000.
+            Int32 port = 8000;
+            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
 
-    
+            // TcpListener server = new TcpListener(port);
+            client = new TcpClient("127.0.0.1", port);
+
+            // Start listening for client requests.
+            //EstadoConnection.text = "mandada la mierda";
+            //server.Start();
+            NetworkStream stream = client.GetStream();
+            string data = "Todo bien desde unity";
+
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+            stream.Write(msg, 0, msg.Length);
+
+            EstadoConnection.text = "mandada la mierda";
+            byte[] buffer = new byte[1024];
+            int bytes = stream.Read(buffer,0,buffer.Length);
+            if (bytes < 0)
+            {
+                EstadoConnection.text = "sin recepcion";
+            }
+            else
+                EstadoConnection.text = "recibido";
+
+            // Enter the listening loop.
+            while (true)
+            {
+                Console.Write("Waiting for a connection... ");
+
+                // Perform a blocking call to accept requests.
+                // You could also use server.AcceptSocket() here.
+                TcpClient client = server.AcceptTcpClient();
+                EstadoBusqueda.text = "Connected!";
+
+                data = null;
+
+                // Get a stream object for reading and writing
+               
+
+                int i;
+
+                
+
+                // Shutdown and end connection
+                client.Close();
+            }
+        }
+        catch (SocketException e)
+        {
+            Console.WriteLine("SocketException: {0}", e);
+        }
+        finally
+        {
+            // Stop listening for new clients.
+            server.Stop();
+        }
+
+        Console.WriteLine("\nHit enter to continue...");
+        Console.Read();
+    }
 }
+
