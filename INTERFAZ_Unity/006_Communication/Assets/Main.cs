@@ -145,7 +145,7 @@ public class Main : MonoBehaviour
             //EstadoConnection.text = "mandada la mierda";
             //server.Start();
             NetworkStream stream = client.GetStream();
-            string data = "Todo bien desde unity";
+            string data = "020-020-150";
 
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
             stream.Write(msg, 0, msg.Length);
