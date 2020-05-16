@@ -6,25 +6,16 @@ import sys
 
 sys.path.insert(1, '../../../control')
 from kinematics import *
+from movement import *
 
-def calc_vel(ref):
-    curpos = Robot.getAngles()
-    err = list()
-    for re,cur in zip(ref,curpos):
-        err.append(abs(re-cur))
+def write(file, robot):
+    pos_teo = forward_kin(robot.getAngles())
+    campos = robot.getCameraPosition()
+    pos_real = [campos[1]*1000,-campos[0]*1000,-campos[2]*1000]
 
-    norm = max(err)
-    err[0]=err[0]/norm
-    # if err[0]<0.05:
-    #     err[0]=0.05
-    err[1]=err[1]/norm
-    # if err[1]<0.05:
-    #     err[1]=0.05
-    err[2]=err[2]/norm
-    # if err[2]<0.05:
-    #     err[2]=0.05
+    file.write("{},{},{},{},{},{}\n".format(pos_teo[0],pos_teo[1],pos_teo[2],
+        pos_real[0],pos_real[1],pos_real[2]))
 
-    return err
 
 # Vrep connection
 vrep.simxFinish(-1) # Ending of previous communication open
@@ -45,62 +36,65 @@ if clientID != -1:
     #Posicion inicial
 
     Robot.setAngles(90,90,90)
-    time.sleep(5)
+    time.sleep(2)
     robpos = forward_kin([90,90,90])
     print("La posicion del efector final es: {}".format(robpos))
 
+    f = open("data.csv","a")
 
-    while True:
-        print("## Pos 1")
-        angles = inverse_kin([-40,-40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
-        time.sleep(1)
-        print(Robot.getAngles())
+    # while True:
+    move(Robot, [80,80,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [-80,80,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [-80,-80,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [80,-80,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [0,0,130])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [40,40,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [-40,40,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [-40,-40,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [40,-40,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [50,-20,180])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [10,-90,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [0,-40,200])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [40,0,250])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [10,10,230])
+    time.sleep(0.5)
+    write(f,Robot)
+    move(Robot, [-100,-100,200])
+    time.sleep(0.5)
+    write(f,Robot)
 
-        print("## Pos 2")
-        angles = inverse_kin([40,-40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
-        time.sleep(1)
-        print(Robot.getAngles())
+    f.close()
 
-        print("## Pos 3")
-        angles = inverse_kin([40,40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
-        time.sleep(1)
-        print(Robot.getAngles())
-
-        print("## Pos 4")
-        angles = inverse_kin([-40,40,150])
-        print(angles)
-        vel = calc_vel(angles)
-        print(vel)
-        Robot.setVelocity(velnom*vel[0], velnom*vel[1], velnom*vel[2])
-        Robot.setAngles(angles[0],angles[1],angles[2])
-        time.sleep(1)
-        print(Robot.getAngles())
     #vrep.simxSynchronousTrigger(clientID)
 
-
-    #Posicion inicial
-
-    Robot.setAngles(30,-10,-20)
-    time.sleep(2)
-
     #Obtención posición base camara respecto centro robot(centro, parte superior)
-    pos = Robot.getCameraPosition()
-    print(pos)
+
 
 else:
     print("Failed connection")
