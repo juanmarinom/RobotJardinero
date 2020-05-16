@@ -2,42 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a449d25-9caa-43ee-bb2f-f24afcd8c501" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DeltaJardinero.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Joints.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/.vs/001_HealthBar/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/.vs/001_HealthBar/v16/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ArtifactDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/CurrentLayout-default.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Assembly-CSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ScriptAssemblies/Assembly-CSharp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/SourceAssetDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/StateCache/SceneView/7f2452-mainStage.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/StateCache/SceneView/7f2452-mainStage.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/shadercompiler-UnityShaderCompiler.exe2.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/001_HealthBar/Library/shadercompiler-UnityShaderCompiler.exe2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/.vs/005_Interfaz_V0/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/.vs/005_Interfaz_V0/v16/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/ArtifactDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/09/094d5075b1b05ae314d1efaf7c98401f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/0a/0a2648fc0f54a01fc07d9bd0ba2b0e13" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/0d/0d3e2f8a5cc9506964d7dd9613e61758" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/1e/1e38e407d7d42a3997a337c762cdc204" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/25/25742aeb6a4919aff5ddfbdffd893585" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/2d/2d1c8b5b3fee075fb61dbdf31eae7e56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/52/524a7a64bd810f9190be48f52a2ec57d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/67/672197ab3bd06e6d2fd62beeabf58411" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/75/7536999d07525556114f0efc8fc918af" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/c2/c2f5d3c979017dedcc160cf724fd38ae" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/d1/d1aeefada890bed72eb9456cf6c04b75" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/db/dba9b4f5f698b9209ffec37e43a2e447" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/Artifacts/fe/fea5eb9db79495a65466b293d14f2632" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/CurrentLayout-default.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/InspectorExpandedItems.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/SourceAssetDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/StateCache/SceneView/7f2452-mainStage.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/005_Interfaz_V0/Library/StateCache/SceneView/7f2452-mainStage.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeltaJardinero.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeltaJardinero.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Joints.py" beforeDir="false" afterPath="$PROJECT_DIR$/Joints.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PruebaProg1.py" beforeDir="false" afterPath="$PROJECT_DIR$/PruebaProg1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -150,5 +117,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DeltaJardinero.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
