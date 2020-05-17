@@ -1,3 +1,6 @@
+import cv2 as cv
+import numpy as np
+
 def DandelionStatus(img):
     ############################################# Clustering
 
@@ -142,4 +145,4 @@ def DandelionStatus(img):
     k = cv.waitKey(0)
     cv.imwrite('DandelionProc.jpg', img)"""
 
-    return Health, leafDens
+    return int(Health*100), leafDens

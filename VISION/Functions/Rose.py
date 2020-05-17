@@ -1,3 +1,6 @@
+import cv2 as cv
+import numpy as np
+
 def RoseStatus(img):
     ############################################# Clustering
 
@@ -143,4 +146,4 @@ def RoseStatus(img):
     k = cv.waitKey(0)
     cv.imwrite('RoseProc.jpg', img)"""
 
-    return Health, leafDens
+    return int(Health*100), leafDens

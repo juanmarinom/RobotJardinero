@@ -1,3 +1,6 @@
+import cv2 as cv
+import numpy as np
+
 def SunflowerStatus(img):
 
     ############################################# Clustering
@@ -148,4 +151,4 @@ def SunflowerStatus(img):
     k = cv.waitKey(0)
     cv.imwrite('SunFlowerProc.jpg', img)"""
 
-    return Health, leafDens
+    return int(Health*100), leafDens

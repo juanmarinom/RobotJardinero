@@ -1,3 +1,6 @@
+import cv2 as cv
+import numpy as np
+
 def TulipStatus(img):
     ############################################# Clustering
 
@@ -143,4 +146,4 @@ def TulipStatus(img):
     k = cv.waitKey(0)
     cv.imwrite('TulipProc.jpg', img)"""
 
-    return Health, leafDens
+    return int(Health*100), leafDens

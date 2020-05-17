@@ -1,3 +1,6 @@
+import cv2 as cv
+import numpy as np
+
 def DaisyStatus(img):
 
     ############################################# Clustering
@@ -142,4 +145,4 @@ def DaisyStatus(img):
     k = cv.waitKey(0)
     cv.imwrite('DaisyProc.jpg',img)"""
 
-    return Health, leafDens
+    return int(Health*100), leafDens
