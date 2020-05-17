@@ -11,7 +11,7 @@ def Flower(flower):
     Health = None
     LeafDens = None
     path = './Flores_Aptas/'
-    n = 3
+    n = 5
     if (flower == 0):
         dir = 'Daisy/'
         num = random.randint(1,n)

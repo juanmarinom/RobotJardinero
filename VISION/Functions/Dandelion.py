@@ -129,7 +129,7 @@ def DandelionStatus(img):
     #print('Health', Health)
 
     # Leaf Density: number of petals per 90º
-    leafDens = None
+    leafDens = solidity
     #leafNum = round((len(list_def)) * 1 + (len(corners) / factor) * 0)
     #leafDens = round(leafNum / (2 * 3.14159265359))
     #print('leafNum', leafNum)
