@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(1, '../')
+
 import math
 import vrep
 import Joints as motor
@@ -79,7 +82,3 @@ class Delta:
 
         r,position = vrep.simxGetObjectPosition(self.clientID, BaseCamara, BaseRobot, vrep.simx_opmode_oneshot_wait)
         return position
-
-
-
-

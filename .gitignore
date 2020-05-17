@@ -1,3 +1,5 @@
 # archivo .gitignore
 
-**/__pychache__/
+*__pycache__/
+*build/
+*dist/
