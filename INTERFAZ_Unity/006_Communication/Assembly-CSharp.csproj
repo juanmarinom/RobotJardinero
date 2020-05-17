@@ -63,9 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Cliente_Unity.cs" />
     <Compile Include="Assets\Connect.cs" />
     <Compile Include="Assets\Main.cs" />
-    <Compile Include="Assets\Unity_Server.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/juanm/OneDrive/Documents/ROBOT JARDINERO/INTERFAZ_Unity/006_Communication/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

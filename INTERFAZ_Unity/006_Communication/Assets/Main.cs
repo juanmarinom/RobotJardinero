@@ -24,23 +24,25 @@ public class Main : MonoBehaviour
     TcpClient client;
     TcpListener server;
     Socket sock;
-    public Unity_Server svr;
+    Cliente_Unity clienteVision = new Cliente_Unity(1000);
+    Cliente_Unity clienteVrep;
     int port;
     NetworkStream stream;
     void Start()
     {
         btn_connect.onClick.AddListener(Connect_client);
-        btn_Buscar.onClick.AddListener(SecuenciaCompleta);
-        Int32 port = 8000;
-        IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+        btn_Buscar.onClick.AddListener(PruebaSock);
+        clienteVrep = new Cliente_Unity(8000);
+        //Int32 port = 8000;
+        // IPAddress localAddr = IPAddress.Parse("127.0.0.1");
 
-        // TcpListener server = new TcpListener(port);
-        client = new TcpClient("127.0.0.1", port);
+        //TcpListener server = new TcpListener(port);
+        // client = new TcpClient("127.0.0.1", port);
 
         // Start listening for client requests.
         //EstadoConnection.text = "mandada la mierda";
         //server.Start();
-        stream = client.GetStream();
+        // stream = client.GetStream();
     }
 
     // Update is called once per frame
@@ -206,6 +208,23 @@ public class Main : MonoBehaviour
 
         Console.WriteLine("\nHit enter to continue...");
         Console.Read();
+    }
+    public void PruebaSock()
+    {
+        float x=0, y=0;
+        string data = "";
+        if (Selector.captionText.text == "MARGARITA")
+        {
+            data = "000-000-150";
+        }
+
+        if (Selector.captionText.text == "ROSA")
+        {
+            data = "040-040-200";
+        }
+
+        clienteVrep.Envio_Vrep(data, x, y);
+
     }
 }
 
