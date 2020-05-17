@@ -1,7 +1,6 @@
 from math import sqrt
 from math import pi
 import math
-import numpy as np
 import time
 import sys
 from kinematics import *

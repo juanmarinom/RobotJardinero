@@ -1,7 +1,6 @@
 from math import sqrt
 from math import pi
 import math
-import numpy as np
 
 def forward_kin(theta):
     # Definición de los parámetros
