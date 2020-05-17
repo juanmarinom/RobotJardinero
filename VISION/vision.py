@@ -1,107 +1,158 @@
 #!/usr/bin/env python3
 
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import random, os
 import tensorflow as tf
-import cv2
-from keras.models import load_model
-from keras.applications import VGG16
-from keras.applications.vgg16 import preprocess_input
+from keras.applications import ResNet50
+from keras.applications.resnet50 import preprocess_input
+from keras.models import Sequential, load_model
+from keras.layers import Dense, Flatten, Dropout
+from keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
+import ServerClass
+import socket
+import MainFlowers
 
 
-
-def splitTestTrain():
+def selectImages():
 	path = "original-jpegs" #Nombre de la carpeta de todas las imagenes
-	trainImages = []
 	testImages = []
 
 	#Se crea un directorio con los subdirectorios test y train
 	try:	
-		os.mkdir('splitImages')
-		os.mkdir('splitImages/train')
-		os.mkdir('splitImages/test')
-		os.mkdir('splitImages/valid')
-		print("Los directorios se han creado correctamente")
+		os.mkdir('testImages')
+		print("El directorio se ha creado correctamente.")
 	
 	except FileExistsError:
 		print ("El directorio ya existe")
 
 
-	if len(os.listdir('splitImages/train/')):
-		print ("El directorio ya tiene fotos.")
-	else:
-	
-		#Lista de rutas de cada imagen
-		for root, dirs, files in os.walk(path):
-			for name in files:
-				if name.endswith(".jpg"):
-					trainImages.append(root+'/'+name)
+	#Lista de rutas de cada imagen
+	for root, dirs, files in os.walk(path):
+		for name in files:
+			if name.endswith(".jpg"):
+				testImages.append(root+'/'+name)
 					
 
-		#Se selecciona el 20% de imágenes aleatoriamente y se eliminan de train
-		random.shuffle(trainImages)
-		testImages = trainImages[0:int(len(trainImages)*0.2)]
-		del trainImages[0:int(len(trainImages)*0.2)]
-		print(len(testImages),len(trainImages))
+	#Se seleccionan el 6 imágenes aleatoriamente y se copian en la carpeta testImages
+	random.shuffle(testImages)
+	testImages = testImages[0:6]
+
+	i=0
 	
-		#Se copian las imagenes en las carpetas de train y test, y se seleccionan 6 para el parterre	
-		i=0	
-		for image in testImages:
-			os.system('cp '+image+' splitImages/test/'+str(i)+'.jpg')
-			i+=1
-		i=0
-		for image in trainImages:
-			os.system('cp '+image+' splitImages/train/'+str(i)+'.jpg')
-			i+=1
-		i=0
-		for image in testImages[0:6]:
-			os.system('cp '+image+' splitImages/valid/'+str(i)+'.jpg')
-			i+=1
+	for image in testImages[0:6]:
+		os.system('cp '+image+' testImages/'+str(i)+'.jpg')
+		i+=1
 	
-		
+def imagesForCV():
+
+	testImages = []
+	path = 'imagenesSeleccionables'
+	os.mkdir('imgFinal')
+	#Lista de rutas de cada imagen
+	for root, dirs, files in os.walk(path):
+		for name in files:
+			if name.endswith(".jpg"):
+				testImages.append(root+'/'+name)
+	random.shuffle(testImages)
+	testImages = testImages[0:6]
+	print (testImages)
+	i=0	
+	for image in testImages:
+		os.system('cp '+image+' imgFinal/'+str(i)+'.jpg')
+		i+=1			
 			
 
-def CNN():
-	model = load_model('TF_85.h5')
-	#model.summary()
-	model.trainable = False #Se ha entrenado la red en Google Collab
+def createCNN():
+
 	
-	imNum = 0
-	classList = []
-	while imNum < 6:
-		img=cv2.imread('splitImages/valid/'+str(imNum)+'.jpg')
-		img = cv2.resize(img,(150,150))
-		img = np.reshape(img,[1,150,150,3])
+	# Create model
+	model = Sequential()
+	model.add(ResNet50(include_top=False, pooling='avg', weights='imagenet'))
+	model.add(Dense(256, activation='relu'))
+	model.add(Dropout(0.5))
+	model.add(Dense(5, activation='softmax'))
+	model.load_weights('best_87.hdf5')
 
-		flowerClass = np.asarray((model.predict(img)).tolist(),dtype=np.int)
+	testFolder = 'testImages/'
+	image_size = 224
+	data_generator = ImageDataGenerator(preprocessing_function=preprocess_input)
+
+	#data = recieveSocket()
+	data= 1
+	pos = int(data)
+
+	
+	#Del socket se reciben categoria y posicion. Si cualquiera es -1, es que se busca el otro dato	
+	if pos>0 and pos<6:
+		tipoPlanta=predict_pos(model,testFolder,pos)
+		print(tipoPlanta)
+		return tipoPlanta
+
+	else:
+		print("Los datos de posicion y categoria no tienen el formato correcto.")
+
+
+
+def predict_cat(model,path,cat):
+
+	posList = [] 
+
+	for imNum in range (0,6):
+		img=image.load_img(path+str(imNum)+'.jpg', target_size=(224,224))
+		img=image.img_to_array(img)
+		img=np.expand_dims(img,axis=0)
+		img=preprocess_input(img)
 		
-		correctClass = 0
-
-		for c in flowerClass[0]:
-			if c>0:				
-				imNum+=1
-				break
-			
-			else:
-				correctClass+=1
-				
-
-		# Clases (una para cada una de las 6 flores):
-		# 0 - Margarita
-		# 1 - Diente de leon
-		# 2 - Rosa
-		# 3 - Girasol
-		# 4 - Tulipan		
-		classList.append(correctClass) # de dimensión [1x6]
-	print(classList)
+		prediction = np.argmax(model.predict(img))
+		
+		if prediction==cat:
+			posList.append(imNum)
+		
+	
+	return posList
 
 
+def predict_pos(model,path,pos):
+	
+	img=image.load_img(path+str(pos)+'.jpg', target_size=(224,224))
+	img=image.img_to_array(img)
+	img=np.expand_dims(img,axis=0)
+	img=preprocess_input(img)
 
-def main():
-	splitTestTrain()
-	CNN()
+	prediction = np.argmax(model.predict(img))
+		
+	return prediction
+
+
+
+def recieveSocket():
+
+	HOST = '127.0.0.1'  # The server's hostname or IP address
+	PORT = 65432        # The port used by the server
+
+	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+	    s.bind((HOST, PORT)) #Creación del socket
+	    s.listen()
+	    conn,addr = s.accept()
+	    data = conn.recv(1024) #Recibimiento de la información
+	    data = data.decode('ascii')
+	    print(data)
+	    conn.sendall(b'1')
+	    #conn.close()
+
+	return data
+		
+
+
+def main():	
+
+	selectImages()
+	flower = createCNN()
+	health, density = MainFlowers.Flower(flower)
+	print (status)
+	
 
 if __name__ == "__main__":
 	main()
