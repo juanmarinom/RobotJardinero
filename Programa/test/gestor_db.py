@@ -1,8 +1,10 @@
 import sqlite3
+import sys
+sys.path.insert(1,'../src/')
 from database import *
 
 # Se accede a la base de datos
-db1 = database("base_de_prueba.db")
+db1 = database("../bin/database.db")
 
 if db1.init()!=-1:
     print("Se ha accedido correctamente a la base de datos.")

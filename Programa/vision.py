@@ -3,22 +3,23 @@ sys.path.insert(1,'./src')
 
 import numpy as np
 import matplotlib.pyplot as plt
-import random, os
+import random
+import os
 from keras.applications import ResNet50
 from keras.applications.resnet50 import preprocess_input
 from keras.models import Sequential, load_model
 from keras.layers import Dense, Flatten, Dropout
 from keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
-import ServerClass
 import socket
 import MainFlowers
 from database import *
-import macros
+from macros import *
+import shutil
 
 
 def selectImages():
-	path = "original-jpegs" #Nombre de la carpeta de todas las imagenes
+	path = "bin/original-jpegs" #Nombre de la carpeta de todas las imagenes
 	testImages = []
 
 	#Se crea un directorio con los subdirectorios test y train
@@ -44,14 +45,15 @@ def selectImages():
 	i=0
 
 	for image in testImages[0:6]:
-		os.system('cp '+image+' bin/testImages/'+str(i)+'.jpg')
+		# os.system('cp '+image+' bin/testImages/'+str(i)+'.jpg')
+		shutil.copy(image,'bin/testImages/'+str(i)+'.jpg')
 		i+=1
 
 def imagesForCV():
 
 	testImages = []
 	path = 'imagenesSeleccionables'
-	os.mkdir('imgFinal')
+	os.mkdir('bin/imgFinal')
 	#Lista de rutas de cada imagen
 	for root, dirs, files in os.walk(path):
 		for name in files:
@@ -62,20 +64,19 @@ def imagesForCV():
 	print (testImages)
 	i=0
 	for image in testImages:
-		os.system('cp '+image+' imgFinal/'+str(i)+'.jpg')
+		# os.system('cp '+image+' bin/imgFinal/'+str(i)+'.jpg')
+		shutil.copy(image, 'bin/imgFinal/'+str(i)+'.jpg')
 		i+=1
 
 
 def createCNN():
-
-
 	# Create model
 	model = Sequential()
 	model.add(ResNet50(include_top=False, pooling='avg', weights='imagenet'))
 	model.add(Dense(256, activation='relu'))
 	model.add(Dropout(0.5))
 	model.add(Dense(5, activation='softmax'))
-	model.load_weights('best_87.hdf5')
+	model.load_weights('bin/best_87.hdf5')
 
 	testFolder = 'bin/testImages/'
 	image_size = 224
@@ -117,7 +118,6 @@ def predict_cat(model,path,cat):
 
 
 def predict_pos(model,path,pos):
-
 	img=image.load_img(path+str(pos)+'.jpg', target_size=(224,224))
 	img=image.img_to_array(img)
 	img=np.expand_dims(img,axis=0)
@@ -130,38 +130,38 @@ def predict_pos(model,path,pos):
 
 
 def connectSocket():
-
 	HOST = '127.0.0.1'  # The server's hostname or IP address
 	PORT = 65432        # The port used by the server
 
-    s.bind((HOST, PORT)) #Creación del socket
-    s.listen()
-    conn,addr = s.accept()
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.bind((HOST, PORT))
+	s.listen()
+	conn,addr = s.accept()
 
 	return conn,addr
 
 
+#### Programa principal
+conn,addr = connectSocket()
+print("Conexion establecida")
+db1 = database("bin/database.db")
+db1.init()
+while True:
+	data = conn.recv(1024) #Recibimiento de la información
+	data = data.decode('ascii')
+	if len(data)==1:
+		selectImages()
+		flower = createCNN()
+		health, density = MainFlowers.Flower(flower)
+		###
+		pos = realpos[str(data)]
+		idplants = db1.get_plantbyspecs(posicion_x=pos[0],posicion_y=pos[1])
 
-def main():
-	conn,addr = connectSocket()
-	db1 = database("bin/base_de_prueba.db")
-	while True:
-		data = conn.recv(1024) #Recibimiento de la información
-	    data = data.decode('ascii')
-		if len(data)>1:
-			selectImages()
-			flower = createCNN()
-			health, density = MainFlowers.Flower(flower)
-			###
-			idplants = db1.get_plantbyspecs(posicion_x=realpos[str(data)][0],posicion_y=realpos[str(data)][1])
+		if len(idplants)!=0:
+			db1.update_plant(idplants[0][0],flowertype[str(flower)],pos[0],pos[1],density,health)
+		else:
+			db1.add_planta(flowertype[str(flower)],realpos[str(data)][0],realpos[str(data)][1],density,health)
+		###
+		conn.sendall(b'1')
 
-			if idplants != None:
-				db1.update_plant(idplants[0],flowertype[flower],realpos[0],realpos[1],density,health)
-			else:
-				db1.add_planta(flowertype[flower],realpos[str(data)][0],realpos[str(data)][1],density,health)
-			###
-		    conn.sendall(b'1')
-
-
-if __name__ == "__main__":
-	main()
+conn.close()

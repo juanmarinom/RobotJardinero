@@ -315,24 +315,25 @@ class database:
                 cat_id = cat[0]
                 break
 
+
+
+        print("El id de la categoria es {}".format(cat_id))
+        print("El id es {}".format(id))
+
         # Se actualizan los campo de la planta
         try:
-            if category!=None:
+            if categoria!=None:
                 if val==True:
-                    self.cursor.execute("UPDATE plantas SET posicion_x = {} WHERE category_id = {}".format(cat_id,id))
-                    print("Se ha actualizado el campo posicion_x.")
+                    self.cursor.execute("UPDATE plantas SET categoria_id = {} WHERE id = {}".format(cat_id,id))
             if posicion_x!=None:
                 self.cursor.execute("UPDATE plantas SET posicion_x = {} WHERE id = {}".format(posicion_x,id))
-                print("Se ha actualizado el campo posicion_x.")
             if posicion_y!=None:
                 self.cursor.execute("UPDATE plantas SET posicion_y = {} WHERE id = {}".format(posicion_y,id))
-                print("Se ha actualizado el campo posicion_y.")
             if DensidadFoliar!=None:
                 self.cursor.execute("UPDATE plantas SET DensidadFoliar = {} WHERE id = {}".format(DensidadFoliar,id))
-                print("Se ha actualizado el campo DensidadFoliar.")
             if Salud!=None:
                 self.cursor.execute("UPDATE plantas SET Salud = {} WHERE id = {}".format(Salud,id))
-                print("Se ha actualizado el campo Salud.")
+            print("Se ha actualizado la planta.")
         except:
             print("No se ha podido actualizar")
             self.connection.close()
