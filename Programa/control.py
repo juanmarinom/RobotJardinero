@@ -11,7 +11,7 @@ from kinematics import *
 from movement import *
 
 HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 65432        # The port used by the server
+PORT = 8000        # The port used by the server
 
 clientID = -1
 while clientID==-1:
@@ -52,9 +52,9 @@ while True:
         print('Posicion de destino: ')
         # print(data)
         dest = data.decode('ascii')
-        XFin=dest[0:3]
-        YFin=dest[4:7]
-        ZFin=dest[8:11]
+        XFin=dest[0:4]
+        YFin=dest[5:9]
+        ZFin=dest[10:14]
         XFin=int(XFin)
         YFin=int(YFin)
         ZFin=int(ZFin)
@@ -63,8 +63,10 @@ while True:
 
         # Se mueve el robot a la posicion recibida
         move_robot(Robot, Ref)
-        time.sleep(0.01)
-        msg = b'1'
+        time.sleep(2)
+        pos = forward_kin(Robot.getAngles())
+        posString = "{}/{}/{}".format(int(pos[0]),int(pos[1]),int(pos[2]))
+        msg = posString.encode('ascii')
         conn.sendall(msg)
 
 s.close()

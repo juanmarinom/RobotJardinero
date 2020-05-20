@@ -16,11 +16,6 @@ def RoseStatus(img):
     res = center[label.flatten()]
     res2 = res.reshape((img.shape))
 
-    ############################################# Threshold parameters, colour of a petal
-
-    lower = 50
-    upper = 255
-
     ############################################# Kernels
 
     kernel = np.ones((3, 3), np.uint8)
@@ -31,6 +26,8 @@ def RoseStatus(img):
     ############################################# Thresholding petals
 
     gray = cv.cvtColor(res2, cv.COLOR_BGR2GRAY)
+    lower = int(np.max(gray) - 1)
+    upper = 255
     mask = cv.inRange(gray, lower, upper)
     # cv.imwrite('mask.jpg', mask)
     # White circle on the center
@@ -54,96 +51,100 @@ def RoseStatus(img):
     # gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     fixed_f32 = np.float32(fixed)
 
-    ############################################# Convex Hull
+    try:
+        ############################################# Convex Hull
 
-    # Finding Contours
+        # Finding Contours
 
-    contours, hierarchy = cv.findContours(fixed, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-    cnt = contours[0]
+        contours, hierarchy = cv.findContours(fixed, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+        cnt = contours[0]
 
-    # Convex Hull
-    hull = cv.convexHull(cnt, returnPoints=False)
+        # Convex Hull
+        hull = cv.convexHull(cnt, returnPoints=False)
 
-    # Defects
-    defects = cv.convexityDefects(cnt, hull)
-    list_def = []
+        # Defects
+        defects = cv.convexityDefects(cnt, hull)
+        list_def = []
 
-    # Painting Convex Hull
-    for i in range(defects.shape[0]):
-        s, e, f, d = defects[i, 0]
-        start = tuple(cnt[s][0])
-        end = tuple(cnt[e][0])
-        far = tuple(cnt[f][0])
-        list_def.append(far)
-        cv.line(img, start, end, [0, 255, 0], 1)
-        cv.circle(img, far, 3, [255, 100, 0], -1)
+        # Painting Convex Hull
+        for i in range(defects.shape[0]):
+            s, e, f, d = defects[i, 0]
+            start = tuple(cnt[s][0])
+            end = tuple(cnt[e][0])
+            far = tuple(cnt[f][0])
+            list_def.append(far)
+            cv.line(img, start, end, [0, 255, 0], 1)
+            cv.circle(img, far, 3, [255, 100, 0], -1)
 
 
-    ############################################# Harris Corner Detector
+        ############################################# Harris Corner Detector
 
-    dst = cv.cornerHarris(fixed_f32, 2, 3, 0.08)  # (fixed_f32, 2, 3, 0.07)
+        dst = cv.cornerHarris(fixed_f32, 2, 3, 0.08)  # (fixed_f32, 2, 3, 0.07)
 
-    # result is dilated for marking the corners
-    dst = cv.dilate(dst, None)
+        # result is dilated for marking the corners
+        dst = cv.dilate(dst, None)
 
-    # Threshold for an optimal value, it may vary depending on the image.
-    img[dst > 0.01 * dst.max()] = [0, 0, 255]
-    corners = []
+        # Threshold for an optimal value, it may vary depending on the image.
+        img[dst > 0.01 * dst.max()] = [0, 0, 255]
+        corners = []
 
-    for i in range(img.shape[1]):
-        for j in range(img.shape[0]):
-            if (img.item(j, i, 2) == 255):
-                corners.append([i, j])
+        for i in range(img.shape[1]):
+            for j in range(img.shape[0]):
+                if (img.item(j, i, 2) == 255):
+                    corners.append([i, j])
 
-    ############################################# Properties
+        ############################################# Properties
 
-    # Area of contour
-    area = cv.contourArea(cnt)
+        # Area of contour
+        area = cv.contourArea(cnt)
 
-    # Perimeter of contour
-    perimeter = cv.arcLength(cnt, True)
+        # Perimeter of contour
+        perimeter = cv.arcLength(cnt, True)
 
-    # Aspect Ratio
-    x, y, w, h = cv.boundingRect(cnt)
+        # Aspect Ratio
+        x, y, w, h = cv.boundingRect(cnt)
 
-    if h > w:
-        aspect_ratio = float(w) / h
-    else:
-        if h < w:
-            aspect_ratio = float(h) / w
+        if h > w:
+            aspect_ratio = float(w) / h
         else:
-            aspect_ratio = 0
+            if h < w:
+                aspect_ratio = float(h) / w
+            else:
+                aspect_ratio = 0
 
-    # Extent
-    rect_area = w * h
-    extent = float(area) / rect_area
+        # Extent
+        rect_area = w * h
+        extent = float(area) / rect_area
 
-    # Solidity
-    hull = cv.convexHull(cnt)
-    hull_area = cv.contourArea(hull)
-    solidity = float(area) / hull_area
-    perfect_extent = 0.7853981633975
-    #print('Extent', extent)
-    #print('aspect_ratio', aspect_ratio)
-    #print('Solidity', solidity)
-    factor = 25
-    Health = (extent / perfect_extent) * 0.3 + aspect_ratio * 0.5 + solidity * 0.2
-    #print('Health', Health)
+        # Solidity
+        hull = cv.convexHull(cnt)
+        hull_area = cv.contourArea(hull)
+        solidity = float(area) / hull_area
+        perfect_extent = 0.7853981633975
+        #print('Extent', extent)
+        #print('aspect_ratio', aspect_ratio)
+        #print('Solidity', solidity)
+        factor = 25
+        Health = (extent / perfect_extent) * 0.3 + aspect_ratio * 0.5 + solidity * 0.2
+        #print('Health', Health)
 
-    # Leaf Density: number of petals per 90º
-    leafNum = round((len(list_def)) * 1 + (len(corners) / factor) * 0)
-    leafDens = round(leafNum / (2 * 3.14159265359))
-    #print('leafNum', leafNum)
-    #print('leafDens per Radian', leafDens)
+        # Leaf Density: number of petals per 90º
+        leafNum = round((len(list_def)) * 1 + (len(corners) / factor) * 0)
+        leafDens = round(leafNum / (2 * 3.14159265359))
+        #print('leafNum', leafNum)
+        #print('leafDens per Radian', leafDens)
 
-    ############################################# Show the image
+        ############################################# Show the image
 
-    """cv.imshow("img", img)
-    cv.imshow("res2", res2)
-    cv.imshow("mask", mask)
-    cv.imshow("mask_op", mask_op)
-    cv.imshow("closing", mask_cl)
-    k = cv.waitKey(0)
-    cv.imwrite('RoseProc.jpg', img)"""
+        """cv.imshow("img", img)
+        cv.imshow("res2", res2)
+        cv.imshow("mask", mask)
+        cv.imshow("mask_op", mask_op)
+        cv.imshow("closing", mask_cl)
+        k = cv.waitKey(0)
+        cv.imwrite('RoseProc.jpg', img)"""
 
-    return int(Health*100), leafDens
+        return int(Health*100), leafDens
+    except:
+        print('No se ha podido establecer contornos, imagen no valida')
+        return 0,0

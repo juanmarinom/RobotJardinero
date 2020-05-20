@@ -131,7 +131,7 @@ def predict_pos(model,path,pos):
 
 def connectSocket():
 	HOST = '127.0.0.1'  # The server's hostname or IP address
-	PORT = 65432        # The port used by the server
+	PORT = 8001        # The port used by the server
 
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	s.bind((HOST, PORT))
