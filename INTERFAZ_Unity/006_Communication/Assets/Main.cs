@@ -24,7 +24,7 @@ public class Main : MonoBehaviour
     TcpClient client;
     TcpListener server;
     Socket sock;
-    Cliente_Unity clienteVision = new Cliente_Unity(1000);
+    Cliente_Unity clienteVision;
     Cliente_Unity clienteVrep;
     int port;
     NetworkStream stream;

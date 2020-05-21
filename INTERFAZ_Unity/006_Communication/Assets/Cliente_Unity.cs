@@ -57,8 +57,8 @@ public class Cliente_Unity : MonoBehaviour
             //El envío de Vrep con la posicion final de la base tiene el formato X-Y. Debemos separarlo para asignarlo a las variables xBaseRobot e yBaseRobot
             var posicionFinal = PosFinal.Split(separador);
             //DUDO DE QUE ESTA CONVERSION SEA ADECUADA. SINO LO PASAMOS COMO STRING PARA FUERA Y YA ESTA
-            //xBaseRobot = (float)System.Convert.ToSingle(posicionFinal[0]);
-            //yBaseRobot = (float)System.Convert.ToSingle(posicionFinal[1]);
+            xBaseRobot = (float)System.Convert.ToSingle(posicionFinal[0]);
+            yBaseRobot = (float)System.Convert.ToSingle(posicionFinal[1]);
             return true;
         }
         else return false;
