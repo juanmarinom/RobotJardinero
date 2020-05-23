@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a449d25-9caa-43ee-bb2f-f24afcd8c501" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assets/Unity_Server.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Assets/Unity_Server.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/ArtifactDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/Artifacts/9f/9f23e2b7a6001950c2b3ef2d76338cc2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/Artifacts/d0/d04e22a590cf7f5580fd9620b91034aa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../../../INTERFAZ_Unity/006_Communication/Library/SourceAssetDB" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
