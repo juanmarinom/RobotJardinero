@@ -146,21 +146,26 @@ conn,addr = connectSocket()
 print("Conexion establecida")
 db1 = database("bin/database.db")
 db1.init()
+selectImages()
 while True:
 	data = conn.recv(1024) #Recibimiento de la información
 	data = data.decode('ascii')
 	if len(data)==1:
-		selectImages()
 		flower = createCNN()
+		print("NN")
 		health, density = MainFlowers.Flower(flower)
+		print("{},{}".format(health,density))
 		###
 		pos = realpos[str(data)]
 		idplants = db1.get_plantbyspecs(posicion_x=pos[0],posicion_y=pos[1])
+		print(idplants)
 
 		if len(idplants)!=0:
 			db1.update_plant(idplants[0][0],flowertype[str(flower)],pos[0],pos[1],density,health)
+			print("Actualizacion")
 		else:
 			db1.add_planta(flowertype[str(flower)],realpos[str(data)][0],realpos[str(data)][1],density,health)
+			print("Add")
 		###
 		conn.sendall(b'1')
 
