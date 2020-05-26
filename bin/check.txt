@@ -1,8 +1,0 @@
-Login log 
-
-URI=file:C:/Users/Alvaro/Desktop/Master/LAB/RobotJardinero/Programa/unity/SQLite_Data/database.db
-URI=file:C:/Users/Alvaro/Desktop/Master/LAB/RobotJardinero/Programa/unity/SQLite_Data/database.db
-URI=file:C:/Users/Alvaro/Desktop/Master/LAB/RobotJardinero/Programa/unity/SQLite_Data/database.db
-URI=file:C:/Users/Alvaro/Desktop/Master/LAB/RobotJardinero/Programa/unity/SQLite_Data/database.db
-URI=file:C:/Users/Alvaro/Desktop/Master/LAB/RobotJardinero/Programa/unity/SQLite_Data/database.db
-URI=file:C:/Users/Alvaro/Desktop/Master/LAB/RobotJardinero/Programa/unity/SQLite_Data/database.db
