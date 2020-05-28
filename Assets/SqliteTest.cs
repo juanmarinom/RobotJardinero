@@ -32,7 +32,7 @@ public class SqliteTest: MonoBehaviour
 	public Text yahayflor;
 	public void buscarporposicion()
 	{
-		string connection = "URI=file:" + Application.dataPath + "/../../bin/database.db";
+		string connection = "URI=file:" + Application.dataPath + "/database.db";//"/../../bin/database.db";
 
 		a.value = 0; 
 		yahayflor.text = "VAYA, PARECE QUE EL ROBOT NO SABE QUE FLOR HAY AQUÍ...";
@@ -67,7 +67,6 @@ public class SqliteTest: MonoBehaviour
 						tipo.text = " LA PLANTA " + reader[0] + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
 						tipoflor.sprite = margarita;
 						yahayflor.text = "";
-
 						break;
 					case 2: 
 						tipo.text = " LA PLANTA " + reader[0] + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  DE FRONDOSIDAD ";
@@ -110,7 +109,7 @@ public class SqliteTest: MonoBehaviour
 		txt4.text = "LA PLANTA 4 NO ES DEL TIPO DE FLOR SELECCIONADO";
 		txt5.text = "LA PLANTA 5 NO ES DEL TIPO DE FLOR SELECCIONADO";
 		txt6.text = "LA PLANTA 6 NO ES DEL TIPO DE FLOR SELECCIONADO";
-		string connection = "URI=file:" + Application.dataPath + "/../../bin/database.db";
+		string connection = "URI=file:" + Application.dataPath + "/database.db";//"/../../bin/database.db";
 		// Open connection
 		IDbConnection dbcon = new SqliteConnection(connection);
 		dbcon.Open();
