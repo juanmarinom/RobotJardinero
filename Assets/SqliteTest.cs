@@ -30,9 +30,28 @@ public class SqliteTest: MonoBehaviour
 	public Image tipoflor;
 	public Sprite margarita, rosa, dientdleon, tulip, girasol;
 	public Text yahayflor;
+
+    public int getPosicion(Int32 pos_x, Int32 pos_y) {
+        switch (pos_x) {
+            case -100 when pos_y == 100:
+                return 1;
+            case 0 when pos_y == 100:
+                return 2;
+            case 100 when pos_y == 100:
+                return 3;
+            case -100 when pos_y == -100:
+                return 4;
+            case 0 when pos_y == -100:
+                return 5;
+            case 100 when pos_y == -100:
+                return 6;
+        }
+        return 0;
+    }
+
 	public void buscarporposicion()
 	{
-		string connection = "URI=file:" + Application.dataPath + "/database.db";//"/../../bin/database.db";
+		string connection = "URI=file:" + Application.dataPath + "/../../bin/database.db";
 
 		a.value = 0; 
 		yahayflor.text = "VAYA, PARECE QUE EL ROBOT NO SABE QUE FLOR HAY AQUÍ...";
@@ -57,6 +76,8 @@ public class SqliteTest: MonoBehaviour
 				//barra de salud
 				int aux = 0;
 				aux = System.Convert.ToInt32(reader[5]);
+                Int32 qposx = System.Convert.ToInt32(reader[2]);
+                Int32 qposy = System.Convert.ToInt32(reader[3]);
 				a.value = (float)aux;
 				fill.color = g.Evaluate(a.normalizedValue);
 
@@ -64,27 +85,27 @@ public class SqliteTest: MonoBehaviour
 				switch (System.Convert.ToInt32(reader[1]))
 				{
 					case 1: 
-						tipo.text = " LA PLANTA " + reader[0] + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
+						tipo.text = " LA PLANTA " + getPosicion(qposx,qposy) + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
 						tipoflor.sprite = margarita;
 						yahayflor.text = "";
 						break;
 					case 2: 
-						tipo.text = " LA PLANTA " + reader[0] + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  DE FRONDOSIDAD ";
+						tipo.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  DE FRONDOSIDAD ";
 						tipoflor.sprite = dientdleon;
 						yahayflor.text = "";
 						break;
 					case 3: 
-						tipo.text = " LA PLANTA " + reader[0] + " ES UNA ROSA CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
+						tipo.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA ROSA CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
                         tipoflor.sprite = rosa;
 						yahayflor.text = "";
 						break;
 					case 4: 
-						tipo.text = " LA PLANTA " + reader[0] + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
+						tipo.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
                         tipoflor.sprite = girasol;
 						yahayflor.text = "";
 						break;
 					case 5:
-						tipo.text = " LA PLANTA " + reader[0] + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
+						tipo.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD Y " + reader[4] + "  PET/RAD ";
                         tipoflor.sprite = tulip;
 						yahayflor.text = "";
 						break;
@@ -109,7 +130,7 @@ public class SqliteTest: MonoBehaviour
 		txt4.text = "LA PLANTA 4 NO ES DEL TIPO DE FLOR SELECCIONADO";
 		txt5.text = "LA PLANTA 5 NO ES DEL TIPO DE FLOR SELECCIONADO";
 		txt6.text = "LA PLANTA 6 NO ES DEL TIPO DE FLOR SELECCIONADO";
-		string connection = "URI=file:" + Application.dataPath + "/database.db";//"/../../bin/database.db";
+		string connection = "URI=file:" + Application.dataPath + "/../../bin/database.db";
 		// Open connection
 		IDbConnection dbcon = new SqliteConnection(connection);
 		dbcon.Open();
@@ -129,7 +150,9 @@ public class SqliteTest: MonoBehaviour
 				//TO DO: Se deberá guardar cada dato en su correspondiente variable	
 				int aux = 0;
 				aux = System.Convert.ToInt32(reader[5]);
-				cont = cont + 1;
+                Int32 qposx = System.Convert.ToInt32(reader[2]);
+                Int32 qposy = System.Convert.ToInt32(reader[3]);
+                cont = cont + 1;
 
 				if (cont == 1)
 				{
@@ -138,19 +161,19 @@ public class SqliteTest: MonoBehaviour
 					switch (System.Convert.ToInt32(reader[1]))
 					{
 						case 1:
-							txt1.text = " LA PLANTA " + cont + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt1.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 2:
-							txt1.text = " LA PLANTA " + cont + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD ";
+							txt1.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD ";
 							break;
 						case 3:
-							txt1.text = " LA PLANTA " + cont + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt1.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 4:
-							txt1.text = " LA PLANTA " + cont + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt1.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 5:
-							txt1.text = " LA PLANTA " + cont + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt1.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 					}
 				}
@@ -161,19 +184,19 @@ public class SqliteTest: MonoBehaviour
 					switch (System.Convert.ToInt32(reader[1]))
 					{
 						case 1:
-							txt2.text = " LA PLANTA " + cont + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt2.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 						break;
 						case 2:
-							txt2.text = " LA PLANTA " + cont + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD ";
+							txt2.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD ";
 						break;
 						case 3:
-							txt2.text = " LA PLANTA " + cont + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt2.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 						break;
 						case 4:
-							txt2.text = " LA PLANTA " + cont + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt2.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 						break;
 						case 5:
-							txt2.text = " LA PLANTA " + cont + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt2.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 					}
 				}
@@ -184,19 +207,19 @@ public class SqliteTest: MonoBehaviour
 					switch (System.Convert.ToInt32(reader[1]))
 					{
 						case 1:
-							txt3.text = " LA PLANTA " + cont + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt3.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 2:
-							txt3.text = " LA PLANTA " + cont + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD  ";
+							txt3.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD  ";
 							break;
 						case 3:
-							txt3.text = " LA PLANTA " + cont + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt3.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 4:
-							txt3.text = " LA PLANTA " + cont + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt3.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 5:
-							txt3.text = " LA PLANTA " + cont + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt3.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 					}
 				}
@@ -207,19 +230,19 @@ public class SqliteTest: MonoBehaviour
 					switch (System.Convert.ToInt32(reader[1]))
 					{
 						case 1:
-							txt4.text = " LA PLANTA " + cont + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt4.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 2:
-							txt4.text = " LA PLANTA " + cont + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD  ";
+							txt4.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD  ";
 							break;
 						case 3:
-							txt4.text = " LA PLANTA " + cont + " ES UNA AMAPOLA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt4.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA AMAPOLA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 4:
-							txt4.text = " LA PLANTA " + cont + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt4.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 5:
-							txt4.text = " LA PLANTA " + cont + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt4.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 					}
 				}
@@ -230,19 +253,19 @@ public class SqliteTest: MonoBehaviour
 					switch (System.Convert.ToInt32(reader[1]))
 					{
 						case 1:
-							txt5.text = " LA PLANTA " + cont + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt5.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 2:
-							txt5.text = " LA PLANTA " + cont + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + " DE FRONDOSIDAD  ";
+							txt5.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + " DE FRONDOSIDAD  ";
 							break;
 						case 3:
-							txt5.text = " LA PLANTA " + cont + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt5.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 4:
-							txt5.text = " LA PLANTA " + cont + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt5.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 5:
-							txt5.text = " LA PLANTA " + cont + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt5.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 					}
 				}
@@ -253,19 +276,19 @@ public class SqliteTest: MonoBehaviour
 					switch (System.Convert.ToInt32(reader[1]))
 					{
 						case 1:
-							txt6.text = " LA PLANTA " + cont + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt6.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA MARGARITA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 2:
-							txt6.text = " LA PLANTA " + cont + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD ";
+							txt6.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN DIENTE DE LEON CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  DE FRONDOSIDAD ";
 							break;
 						case 3:
-							txt6.text = " LA PLANTA " + cont + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt6.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UNA ROSA CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 4:
-							txt6.text = " LA PLANTA " + cont + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt6.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN GIRASOL CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 						case 5:
-							txt6.text = " LA PLANTA " + cont + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
+							txt6.text = " LA PLANTA " + getPosicion(qposx, qposy) + " ES UN TULIPAN CON " + reader[5] + " % DE SALUD  Y " + reader[4] + "  PET/RAD ";
 							break;
 					}
 				}
